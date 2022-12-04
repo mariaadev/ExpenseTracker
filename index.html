@@ -7,41 +7,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
     <link rel="stylesheet" href="./reset.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
-    
+
 </head>
 
 <body>
+
     <div class="flex-container">
         <div class="savings-wrapper">
             <div class="text-savings">Your savings</div>
             <div class="amount-savings">125€</div>
         </div>
         <div class="income-expenses-container">
-        <div class="income-expenses-wrapper">
-            <div class="income-wrapper">
-                <div class="income-text">Income</div>
-                <div class="income-amount">150€</div>
+            <div class="income-expenses-wrapper">
+                <div class="income-wrapper">
+                    <div class="income-text">Income</div>
+                    <div class="income-amount">150€</div>
+                </div>
+                <div class="vertical-line-wrapper">
+                    <span class="vertical-line"></span>
+                </div>
+                <div class="expenses-wrapper">
+                    <div class="expenses-text">Expenses</div>
+                    <div class="expenses-amount">-25€</div>
+                </div>
             </div>
-            <div class="vertical-line-wrapper">
-            <span class="vertical-line"></span>
-            </div>
-            <div class="expenses-wrapper">
-                <div class="expenses-text">Expenses</div>
-                <div class="expenses-amount">-25€</div>
-            </div>
-        </div>
         </div>
         <div class="my-transactions-container">
-        <div class="my-transactions-wrapper">
-            <div class="transaction-text">My transactions</div>
-            <div class="meatball-menu">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
+            <div class="my-transactions-wrapper">
+                <div class="transaction-text">My transactions</div>
+                <div class="meatball-menu">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
             </div>
         </div>
+        <div class="card-container">
+            <div class="card-placeholder">
+                <div class="card-text">Add your first item and start tracking your expenses!</div>
+                <div class="emojis-placeholder">&#128184; &#129488;</div>
+            </div>
+        </div>
+        <div class="selector">
+            <div id="select-concept">
+                <p>Select a concept</p>
+                <img src="./images/arrow-down.svg" alt="Arrow down">
+            </div>
+            <ul id="concept-list">
+                <li>
+                    <div class="options">
+                        <p class="emoji">&#128181;</p>
+                        <p class="text-concept">Salary</p>
+                    </div>
+                   
+                </li>
+
+                <li>
+                    <div class="options">
+                        <p class="emoji">&#128176;</p>
+                        <p class="text-concept">Savings</p>
+                    </div>
+                   
+                </li>
+
+                <li>
+                    <div class="options">
+                        <p class="emoji">&#127968;</p>
+                        <p class="text-concept">Rent</p>
+                    </div>
+                  
+                </li>
+
+                <li>
+                    <div class="options">
+                        <p class="emoji">&#128646;</p>
+                        <p class="text-concept">Transport</p>
+                    </div>
+                    
+                </li>
+
+                <li>
+                    <div class="options">
+                        <p class="emoji">&#128663;</p>
+                        <p class="text-concept">Car</p>
+                    </div>
+                   
+                </li>
+
+                <li>
+                    <div class="options">
+                        <p class="emoji">&#128717;</p>
+                        <p class="text-concept">Shopping</p>
+                    </div>
+                   
+                </li>
+                <li>
+                    <div class="options">
+                        <p class="emoji">&#127829;</p>
+                        <p class="text-concept">Food</p>
+                    </div>
+                  
+                </li>
+                <li>
+                    <div class="options">
+                        <p class="emoji">&#129534;</p>
+                        <p class="text-concept">Bills</p>
+                    </div>
+                   
+                </li>
+                <li>
+                    <div class="options">
+                        <p class="emoji">&#127916;</p>
+                        <p class="text-concept">Entertaiment</p>
+                    </div>
+                   
+                </li>
+                <li>
+                    <div class="options">
+                        <p class="emoji">&#128184;</p>
+                        <p class="text-concept">Others</p>
+                    </div>
+                    
+                </li>
+            </ul>
         </div>
     </div>
     <script src="./index.js"></script>
