@@ -37,6 +37,7 @@ cancelButton.addEventListener("click", (event) => {
 })
 
 editButton.addEventListener("click", (event) => {
+   
 })
 
 
@@ -158,7 +159,8 @@ function addItem() {
     itemWrapper.appendChild(amountWrapper)
     amountWrapper.appendChild(amount)
     cardPlaceholder.appendChild(itemContainer)
-    itemContainer.appendChild(itemWrapper)
+    //insert as first child
+    itemContainer.insertBefore(itemWrapper, itemContainer.firstChild)
   }
     
 }
