@@ -49,22 +49,25 @@ addTransaction.addEventListener("click", (event) => {
     // comprobar que input es 1 número
     //comprobar si es positivo o negativo
     //sumarlo a Income o Expenses dependiendo de neg o posi
-    let inputNumber = parseInt(inputText.value)
-    let incomeTotal = parseInt(incomeUI.innerText.replace("€",""))
-    let expensesTotal = parseInt(expensesUI.innerText.replace("€",""))
-    let savingsTotal = parseInt(savings.innerText.replace("€",""))
+    event.preventDefault()
+    let inputNumber = parseFloat(inputText.value)
+    let incomeTotal = parseFloat(incomeUI.innerText.replace("€",""))
+    let expensesTotal = parseFloat(expensesUI.innerText.replace("€",""))
+    let savingsTotal = parseFloat(savings.innerText.replace("€",""))
     if (inputNumber) {
         if (inputNumber > 0) {
             incomeTotal = inputNumber + incomeTotal
-            incomeUI.innerText = `${incomeTotal}€`
-            savings.innerText = `${incomeTotal - expensesTotal}€`
+            incomeUI.innerText = `${parseFloat(incomeTotal).toFixed(2)}€`
+            savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
         }
         else {
             expensesTotal = Math.abs(inputNumber - expensesTotal)
-            expensesUI.innerText = `${expensesTotal}€`
-            savings.innerText = `${incomeTotal - expensesTotal}€`
+            expensesUI.innerText = `${parseFloat(expensesTotal).toFixed(2)}€`
+            savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
         }
     }
   
 })
+
+
 
