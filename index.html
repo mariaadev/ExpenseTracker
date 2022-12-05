@@ -155,10 +155,10 @@
             </div>
             <div class="amount-input-wrapper">
                 <label for="amount">Amount (negative numbers for expenses)</label>
-                <input type="text" id="amount" placeholder="Enter amount" pattern="[0-9]+" required>
+                <input type="text" id="amount" placeholder="Enter amount" pattern="^-?\d*\.{0,1}\d+$" maxlength="10" required>
             </div>
             <div class="button-wrapper">
-            <button class="submit-button" type="submit">
+            <button class="submit-button" type="submit" >
                 <p>Add transaction</p>
             </button>
             </div>

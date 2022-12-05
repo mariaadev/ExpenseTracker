@@ -58,22 +58,32 @@ let incomeTotal = parseFloat(incomeUI.innerText.replace("€",""))
 let expensesTotal = parseFloat(expensesUI.innerText.replace("€",""))
 let savingsTotal = parseFloat(savings.innerText.replace("€",""))
 
+let input = document.querySelector("input")
+let concept = document.querySelector("#select-concept")
     if (inputNumber && isConceptSelected) {
         if (inputNumber > 0) {
             incomeTotal = inputNumber + incomeTotal
             incomeUI.innerText = `${parseFloat(incomeTotal).toFixed(2)}€`
             savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
             addItem()
+            input.style.border = "none"
+            concept.style.border = "none"
         }
         else {
             expensesTotal = Math.abs(inputNumber - expensesTotal)
             expensesUI.innerText = `${parseFloat(expensesTotal).toFixed(2)}€`
             savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
             addItem()
+            input.style.border = "none"
+            concept.style.border = "none"
         }
+    } else {
+        input.style.border = "1px solid red"
+        concept.style.border = "1px solid red"
     }
   
 })
+
 
 let cardPlaceholder = document.querySelector(".card-placeholder")
 let cardText = document.querySelector(".card-text")
@@ -82,6 +92,8 @@ let cardEmojisPlaceholder = document.querySelector(".emojis-placeholder")
 
 
 function addItem() {
+    let inputText = document.getElementById("amount")
+    let textConcept = document.querySelector(".text-concept")
   if (isConceptSelected) {
     cardText.remove()
     cardEmojisPlaceholder.remove()
@@ -92,13 +104,21 @@ function addItem() {
     itemContainer.style.borderRadius = "15px"
     itemContainer.style.boxShadow = "0px 4px 4px 0px #00000040" 
     itemContainer.style.display = "flex"
-    itemContainer.style.justifyContent = "flex-start"
+    itemContainer.style.justifyContent = "space-around"
     itemContainer.style.alignItems = "center"
     itemContainer.style.padding = "7px"
+    
+    let emojiContainer = document.createElement("div")
+    emojiContainer.style.display = "flex"
+    emojiContainer.style.flexGrow = "1"
+    emojiContainer.style.justifyContent = "flex-start"
+    emojiContainer.style.width = "100px"
+    emojiContainer.style.height = "43px"
     let emojiWrapper = document.createElement("div")
     emojiWrapper.style.display = "flex"
     emojiWrapper.style.justifyContent = "center"
     emojiWrapper.style.alignItems = "center"
+    emojiWrapper.style.alignSelf = "flex-start"
     emojiWrapper.style.width = "55px"
     emojiWrapper.style.height = "43px"
     emojiWrapper.style.backgroundColor = " #6D6D6D8A"
@@ -108,8 +128,33 @@ function addItem() {
     emojiWrapper.innerText = emoji.innerText
     emojiWrapper.style.fontSize = "2.3rem"
     emojiWrapper.style.textAlign = "center"
-    itemContainer.appendChild(emojiWrapper)
+    
+    let categoryWrapper = document.createElement("div")
+    categoryWrapper.style.flexGrow = "1"
+    let category = document.createElement("p")
+    category.innerText = textConcept.innerText
+    category.style.fontSize = "0.9rem"
+    category.style.color = "#FFFFFF"
+    category.style.fontWeight = "400"
+    
+    let amountWrapper = document.createElement("div")
+    amountWrapper.style.flexGrow = "2"
+    let amount = document.createElement("p")
+    amount.innerText = `${inputText.value} €`
+    amount.style.fontSize = "1.1rem"
+    amount.style.textAlign = "right"
+    amount.style.color = parseFloat(inputText.value) > 0 ? "var(--income-color)" : "var(--expenses-color)"
+    amount.style.fontWeight = "500"
+    amount.style.textShadow = "0px 4px 4px 0px #00000040"
+
+    emojiContainer.appendChild(emojiWrapper)
+    itemContainer.appendChild(emojiContainer)
+    categoryWrapper.appendChild(category)
+    itemContainer.appendChild(categoryWrapper)
+    itemContainer.appendChild(amountWrapper)
+    amountWrapper.appendChild(amount)
     cardPlaceholder.appendChild(itemContainer)
   }
     
 }
+

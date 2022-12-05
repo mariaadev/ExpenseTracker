@@ -388,7 +388,3 @@ button[type="submit"]:hover{
   justify-content: center;
   margin: 20px;
 }
-
-button .disabled {
-  background-color: #5f8092;
-}
