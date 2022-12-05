@@ -88,25 +88,29 @@ let concept = document.querySelector("#select-concept")
 let cardPlaceholder = document.querySelector(".card-placeholder")
 let cardText = document.querySelector(".card-text")
 let cardEmojisPlaceholder = document.querySelector(".emojis-placeholder")
-
+let itemContainer = document.createElement("ul")
+itemContainer.style.overflowY = "scroll"
+itemContainer.style.overflowX = "hidden"
 
 
 function addItem() {
     let inputText = document.getElementById("amount")
     let textConcept = document.querySelector(".text-concept")
+   
   if (isConceptSelected) {
     cardText.remove()
     cardEmojisPlaceholder.remove()
-    let itemContainer = document.createElement("div")
-    itemContainer.style.backgroundColor = "#6D6D6D8A"
-    itemContainer.style.width = "324px"
-    itemContainer.style.height = "50px"
-    itemContainer.style.borderRadius = "15px"
-    itemContainer.style.boxShadow = "0px 4px 4px 0px #00000040" 
-    itemContainer.style.display = "flex"
-    itemContainer.style.justifyContent = "space-around"
-    itemContainer.style.alignItems = "center"
-    itemContainer.style.padding = "7px"
+    let itemWrapper = document.createElement("li")
+    itemWrapper.style.backgroundColor = "#6D6D6D8A"
+    itemWrapper.style.width = "300px"
+    itemWrapper.style.height = "50px"
+    itemWrapper.style.borderRadius = "15px"
+    itemWrapper.style.boxShadow = "0px 4px 4px 0px #00000040" 
+    itemWrapper.style.display = "flex"
+    itemWrapper.style.justifyContent = "space-around"
+    itemWrapper.style.alignItems = "center"
+    itemWrapper.style.padding = "7px"
+    itemWrapper.style.margin = "7px"
     
     let emojiContainer = document.createElement("div")
     emojiContainer.style.display = "flex"
@@ -148,13 +152,18 @@ function addItem() {
     amount.style.textShadow = "0px 4px 4px 0px #00000040"
 
     emojiContainer.appendChild(emojiWrapper)
-    itemContainer.appendChild(emojiContainer)
+    itemWrapper.appendChild(emojiContainer)
     categoryWrapper.appendChild(category)
-    itemContainer.appendChild(categoryWrapper)
-    itemContainer.appendChild(amountWrapper)
+    itemWrapper.appendChild(categoryWrapper)
+    itemWrapper.appendChild(amountWrapper)
     amountWrapper.appendChild(amount)
     cardPlaceholder.appendChild(itemContainer)
+    itemContainer.appendChild(itemWrapper)
   }
     
 }
 
+
+function deleteItem () {
+
+}
