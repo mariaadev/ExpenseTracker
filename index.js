@@ -36,3 +36,35 @@ cancelButton.addEventListener("click", (event) => {
 
 editButton.addEventListener("click", (event) => {
 })
+
+
+
+let addTransaction = document.querySelector(".submit-button")
+let inputText = document.getElementById("amount")
+let incomeUI = document.querySelector(".income-amount")
+let expensesUI = document.querySelector(".expenses-amount")
+let savings = document.querySelector(".amount-savings")
+
+addTransaction.addEventListener("click", (event) => {
+    // comprobar que input es 1 número
+    //comprobar si es positivo o negativo
+    //sumarlo a Income o Expenses dependiendo de neg o posi
+    let inputNumber = parseInt(inputText.value)
+    let incomeTotal = parseInt(incomeUI.innerText.replace("€",""))
+    let expensesTotal = parseInt(expensesUI.innerText.replace("€",""))
+    let savingsTotal = parseInt(savings.innerText.replace("€",""))
+    if (inputNumber) {
+        if (inputNumber > 0) {
+            incomeTotal = inputNumber + incomeTotal
+            incomeUI.innerText = `${incomeTotal}€`
+            savings.innerText = `${incomeTotal - expensesTotal}€`
+        }
+        else {
+            expensesTotal = Math.abs(inputNumber - expensesTotal)
+            expensesUI.innerText = `${expensesTotal}€`
+            savings.innerText = `${incomeTotal - expensesTotal}€`
+        }
+    }
+  
+})
+

@@ -145,6 +145,7 @@
 
 .edit-menu-wrapper {
   display: flex;
+  opacity: 0;
   justify-content: flex-end;
   height: 92px;
   width: 360px;
@@ -153,7 +154,7 @@
 }
 
 .active {
-  opacity: 0;
+  opacity: 1;
 }
 
 .edit-menu {
@@ -386,4 +387,8 @@ button[type="submit"]:hover{
   display: flex;
   justify-content: center;
   margin: 20px;
+}
+
+button .disabled {
+  background-color: #5f8092;
 }
