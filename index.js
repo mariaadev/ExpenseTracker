@@ -202,14 +202,25 @@ function editIems () {
         if (!item.querySelector("button")) {
             let removeButton = document.createElement("button")
             removeButton.classList.add("removeButton")
-            removeButton.style.width = "30px"
-            removeButton.style.height = "30px"
-            removeButton.style.backgroundColor = "red"
+            removeButton.style.display = "flex"
+            removeButton.style.justifyContent = "center"
+            removeButton.style.alignItems = "center"
+            removeButton.style.width = "25px"
+            removeButton.style.height = "25px"
+            removeButton.style.backgroundColor = "#CF0000"
             removeButton.style.border = "none"
             removeButton.style.cursor = "pointer"
             removeButton.style.borderRadius = "50%"
-            removeButton.style.display = "inline-block"
+            removeButton.style.boxShadow = "0px 4px 4px 0px #00000040" 
             removeButton.style.margin = "10px"
+            let horizontalLine = document.createElement("hr")
+            horizontalLine.style.width = "15px"
+            horizontalLine.style.height = "2px"
+            horizontalLine.style.border = "none"
+            horizontalLine.style.backgroundColor = "#FFFFFF"
+            horizontalLine.style.padding = "0"
+            
+            removeButton.append(horizontalLine)
             item.insertBefore(removeButton, item.firstChild) 
             //add event listener for each button
             removeButton.addEventListener("click",(event) => {
