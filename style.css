@@ -150,7 +150,7 @@
   height: 92px;
   width: 360px;
   position: absolute;
-  z-index: 10;
+  z-index: 20;
 }
 
 .active {
@@ -388,4 +388,63 @@ button[type="submit"]:hover{
   display: flex;
   justify-content: center;
   margin: 20px;
+}
+
+
+.done-menu-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+}
+
+.done-menu-wrapper {
+  display: flex;
+  opacity: 0;
+  justify-content: flex-end;
+  height: 92px;
+  width: 360px;
+  position: absolute;
+  z-index: 10;
+}
+
+.active {
+  opacity: 1;
+}
+
+.done-menu {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 125px;
+  height: 50px;
+  background-color:#949494;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  border-radius: 20px; 
+  
+}
+
+.done-menu button {
+  text-align: left;
+  background-color: #3C515C;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  width: 111px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px; 
+  margin: 5px;
+
+}
+
+.done-menu button:hover {
+  background-color: #5f8092;
+}
+
+.done-menu p {
+  color: #FFFFFF;
+  font-size: 0.9rem;
+  padding: 5px;
+  
 }

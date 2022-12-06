@@ -24,22 +24,37 @@ options.forEach(option => {
 });
 
 let editMenu = document.querySelector(".edit-menu-wrapper");
-let meatballButton = document.querySelector(".meatball-menu");
-meatballButton.addEventListener("click", (event) => {
-    editMenu.classList.toggle("active")
-})
+let doneMenu = document.querySelector(".done-menu-wrapper")
 
+let meatballButton = document.querySelector(".meatball-menu");
 let editButton = document.querySelector(".edit")
 let cancelButton = document.querySelector(".cancel")
+let doneButton = document.querySelector(".done")
+
+
+meatballButton.addEventListener("click", (event) => {
+    editMenu.classList.toggle("active")
+    
+})
 
 cancelButton.addEventListener("click", (event) => {
     editMenu.classList.toggle("active")
 })
 
 editButton.addEventListener("click", (event) => {
+    editIems()
+    editMenu.classList.toggle("active")
+    doneMenu.classList.toggle("active")
    
+
 })
 
+doneButton.addEventListener("click", (event) => {
+    doneMenu.classList.toggle("active")
+    removeEditUI()
+    
+    
+})
 
 //button
 let addTransaction = document.querySelector(".submit-button")
@@ -97,11 +112,12 @@ itemContainer.style.overflowX = "hidden"
 function addItem() {
     let inputText = document.getElementById("amount")
     let textConcept = document.querySelector(".text-concept")
-   
+
   if (isConceptSelected) {
     cardText.remove()
     cardEmojisPlaceholder.remove()
     let itemWrapper = document.createElement("li")
+    itemWrapper.classList.add("item-wrapper")
     itemWrapper.style.backgroundColor = "#6D6D6D8A"
     itemWrapper.style.width = "300px"
     itemWrapper.style.height = "50px"
@@ -165,7 +181,37 @@ function addItem() {
     
 }
 
+function editIems () {  
+    let itemsList = document.getElementsByClassName("item-wrapper")
+   
+    for (let item of itemsList) {
+        //check if already has a removebutton
+        if (!item.querySelector("button")) {
+            let removeButton = document.createElement("button")
+            removeButton.classList.add("removeButton")
+            removeButton.style.width = "30px"
+            removeButton.style.height = "30px"
+            removeButton.style.backgroundColor = "red"
+            removeButton.style.border = "none"
+            removeButton.style.borderRadius = "50%"
+            removeButton.style.display = "inline-block"
+            removeButton.style.margin = "10px"
+            item.insertBefore(removeButton, item.firstChild)  
+        }
+            
+    }
+    
+   
+}
+
+function removeEditUI () {
+    let itemWrapper = document.querySelector(".item-wrapper")
+    let removeButtons = document.querySelectorAll(".removeButton")
+    for (let button of removeButtons) {
+        itemWrapper = itemWrapper.removeChild(button)
+    }
+}
 
 function deleteItem () {
-
+    
 }
