@@ -207,13 +207,19 @@ function editIems () {
 }
 
 function removeEditUI () {
-    let itemWrapper = document.querySelector(".item-wrapper")
-    let removeButtons = document.querySelectorAll(".removeButton")
-    for (let button of removeButtons) {
-        itemWrapper = itemWrapper.removeChild(button)
+    let buttons = document.querySelectorAll(".removeButton")
+    
+    for (let button of buttons) {
+        button.remove()
     }
+    
 }
 
-function deleteItem () {
+function deleteItem () { 
+    let itemWrapper = document.querySelectorAll(".item-wrapper")
     
+    for (let item of itemWrapper) {
+            item = item.remove()
+        
+    }
 }
