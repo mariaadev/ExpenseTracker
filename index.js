@@ -30,12 +30,19 @@ let meatballButton = document.querySelector(".meatball-menu");
 let editButton = document.querySelector(".edit")
 let cancelButton = document.querySelector(".cancel")
 let doneButton = document.querySelector(".done")
+let isDoneMenu = false
 
 
 meatballButton.addEventListener("click", (event) => {
-    editMenu.classList.toggle("active")
-    
-})
+        if (isDoneMenu) {
+            event.stopPropagation()
+        } else {
+            editMenu.classList.toggle("active")
+        }
+       
+    })
+
+
 
 cancelButton.addEventListener("click", (event) => {
     editMenu.classList.toggle("active")
@@ -43,6 +50,7 @@ cancelButton.addEventListener("click", (event) => {
 
 editButton.addEventListener("click", (event) => {
     editIems()
+    isDoneMenu = true
     editMenu.classList.toggle("active")
     doneMenu.classList.toggle("active")
     doneMenu.classList.toggle("top")
@@ -51,12 +59,15 @@ editButton.addEventListener("click", (event) => {
 })
 
 doneButton.addEventListener("click", (event) => {
+    isDoneMenu = false
     doneMenu.classList.toggle("active")
     doneMenu.classList.toggle("top")
     removeEditUI()
     
     
 })
+
+
 
 //button
 let addTransaction = document.querySelector(".submit-button")
