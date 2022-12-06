@@ -206,10 +206,15 @@ function editIems () {
             removeButton.style.height = "30px"
             removeButton.style.backgroundColor = "red"
             removeButton.style.border = "none"
+            removeButton.style.cursor = "pointer"
             removeButton.style.borderRadius = "50%"
             removeButton.style.display = "inline-block"
             removeButton.style.margin = "10px"
-            item.insertBefore(removeButton, item.firstChild)  
+            item.insertBefore(removeButton, item.firstChild) 
+            //add event listener for each button
+            removeButton.addEventListener("click",(event) => {
+                removeButton.parentElement.remove()
+             }) 
         }
             
     }
@@ -226,11 +231,3 @@ function removeEditUI () {
     
 }
 
-function deleteItem () { 
-    let itemWrapper = document.querySelectorAll(".item-wrapper")
-    
-    for (let item of itemWrapper) {
-            item = item.remove()
-        
-    }
-}
