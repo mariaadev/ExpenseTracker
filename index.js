@@ -45,12 +45,14 @@ editButton.addEventListener("click", (event) => {
     editIems()
     editMenu.classList.toggle("active")
     doneMenu.classList.toggle("active")
+    doneMenu.classList.toggle("top")
    
 
 })
 
 doneButton.addEventListener("click", (event) => {
     doneMenu.classList.toggle("active")
+    doneMenu.classList.toggle("top")
     removeEditUI()
     
     
