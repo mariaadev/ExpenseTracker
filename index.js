@@ -34,13 +34,13 @@ let isDoneMenu = false
 
 
 meatballButton.addEventListener("click", (event) => {
-        if (isDoneMenu) {
-            event.stopPropagation()
-        } else {
-            editMenu.classList.toggle("active")
-        }
-       
-    })
+    if (isDoneMenu) {
+        event.stopPropagation()
+    } else {
+        editMenu.classList.toggle("active")
+    }
+
+})
 
 
 
@@ -54,7 +54,7 @@ editButton.addEventListener("click", (event) => {
     editMenu.classList.toggle("active")
     doneMenu.classList.toggle("active")
     doneMenu.classList.toggle("top")
-   
+
 
 })
 
@@ -63,8 +63,8 @@ doneButton.addEventListener("click", (event) => {
     doneMenu.classList.toggle("active")
     doneMenu.classList.toggle("top")
     removeEditUI()
-    
-    
+
+
 })
 
 
@@ -75,20 +75,20 @@ let addTransaction = document.querySelector(".submit-button")
 addTransaction.addEventListener("click", (event) => {
     // check input is a number, if it is positive or negative and sum totals
     event.preventDefault()
-   //input values
-let inputText = document.getElementById("amount")
-let inputNumber = parseFloat(inputText.value)
-//before UI income expenses
-let incomeUI = document.querySelector(".income-amount")
-let expensesUI = document.querySelector(".expenses-amount")
-let savings = document.querySelector(".amount-savings")
-//after UI income expenses
-let incomeTotal = parseFloat(incomeUI.innerText.replace("€",""))
-let expensesTotal = parseFloat(expensesUI.innerText.replace("€",""))
-let savingsTotal = parseFloat(savings.innerText.replace("€",""))
+    //input values
+    let inputText = document.getElementById("amount")
+    let inputNumber = parseFloat(inputText.value)
+    //before UI income expenses
+    let incomeUI = document.querySelector(".income-amount")
+    let expensesUI = document.querySelector(".expenses-amount")
+    let savings = document.querySelector(".amount-savings")
+    //after UI income expenses
+    let incomeTotal = parseFloat(incomeUI.innerText.replace("€", ""))
+    let expensesTotal = parseFloat(expensesUI.innerText.replace("€", ""))
+    let savingsTotal = parseFloat(savings.innerText.replace("€", ""))
 
-let input = document.querySelector("input")
-let concept = document.querySelector("#select-concept")
+    let input = document.querySelector("input")
+    let concept = document.querySelector("#select-concept")
     if (inputNumber && isConceptSelected) {
         if (inputNumber > 0) {
             incomeTotal = inputNumber + incomeTotal
@@ -110,7 +110,7 @@ let concept = document.querySelector("#select-concept")
         input.style.border = "1px solid red"
         concept.style.border = "1px solid red"
     }
-  
+
 })
 
 
@@ -126,77 +126,78 @@ function addItem() {
     let inputText = document.getElementById("amount")
     let textConcept = document.querySelector(".text-concept")
 
-  if (isConceptSelected) {
-    cardText.remove()
-    cardEmojisPlaceholder.remove()
-    let itemWrapper = document.createElement("li")
-    itemWrapper.classList.add("item-wrapper")
-    itemWrapper.style.backgroundColor = "#6D6D6D8A"
-    itemWrapper.style.width = "300px"
-    itemWrapper.style.height = "50px"
-    itemWrapper.style.borderRadius = "15px"
-    itemWrapper.style.boxShadow = "0px 4px 4px 0px #00000040" 
-    itemWrapper.style.display = "flex"
-    itemWrapper.style.justifyContent = "space-around"
-    itemWrapper.style.alignItems = "center"
-    itemWrapper.style.padding = "7px"
-    itemWrapper.style.margin = "7px"
-    
-    let emojiContainer = document.createElement("div")
-    emojiContainer.style.display = "flex"
-    emojiContainer.style.flexGrow = "1"
-    emojiContainer.style.justifyContent = "flex-start"
-    emojiContainer.style.width = "100px"
-    emojiContainer.style.height = "43px"
-    let emojiWrapper = document.createElement("div")
-    emojiWrapper.style.display = "flex"
-    emojiWrapper.style.justifyContent = "center"
-    emojiWrapper.style.alignItems = "center"
-    emojiWrapper.style.alignSelf = "flex-start"
-    emojiWrapper.style.width = "55px"
-    emojiWrapper.style.height = "43px"
-    emojiWrapper.style.backgroundColor = " #6D6D6D8A"
-    emojiWrapper.style.boxShadow = "0px 4px 4px 0px #00000040" 
-    emojiWrapper.style.borderRadius = "15px"
-    let emoji = selectConcept.querySelector(".emoji")
-    emojiWrapper.innerText = emoji.innerText
-    emojiWrapper.style.fontSize = "2.3rem"
-    emojiWrapper.style.textAlign = "center"
-    
-    let categoryWrapper = document.createElement("div")
-    categoryWrapper.style.flexGrow = "1"
-    let category = document.createElement("p")
-    category.innerText = textConcept.innerText
-    category.style.fontSize = "0.9rem"
-    category.style.color = "#FFFFFF"
-    category.style.fontWeight = "400"
-    
-    let amountWrapper = document.createElement("div")
-    amountWrapper.style.flexGrow = "2"
-    let amount = document.createElement("p")
-    amount.innerText = `${inputText.value} €`
-    amount.style.fontSize = "1.1rem"
-    amount.style.textAlign = "right"
-    amount.style.color = parseFloat(inputText.value) > 0 ? "var(--income-color)" : "var(--expenses-color)"
-    amount.style.fontWeight = "500"
-    amount.style.textShadow = "0px 4px 4px 0px #00000040"
+    if (isConceptSelected) {
+        cardText.remove()
+        cardEmojisPlaceholder.remove()
+        let itemWrapper = document.createElement("li")
+        itemWrapper.classList.add("item-wrapper")
+        itemWrapper.style.backgroundColor = "#6D6D6D8A"
+        itemWrapper.style.width = "300px"
+        itemWrapper.style.height = "50px"
+        itemWrapper.style.borderRadius = "15px"
+        itemWrapper.style.boxShadow = "0px 4px 4px 0px #00000040"
+        itemWrapper.style.display = "flex"
+        itemWrapper.style.justifyContent = "space-around"
+        itemWrapper.style.alignItems = "center"
+        itemWrapper.style.padding = "7px"
+        itemWrapper.style.margin = "7px"
 
-    emojiContainer.appendChild(emojiWrapper)
-    itemWrapper.appendChild(emojiContainer)
-    categoryWrapper.appendChild(category)
-    itemWrapper.appendChild(categoryWrapper)
-    itemWrapper.appendChild(amountWrapper)
-    amountWrapper.appendChild(amount)
-    cardPlaceholder.appendChild(itemContainer)
-    //insert as first child
-    itemContainer.insertBefore(itemWrapper, itemContainer.firstChild)
-  }
-    
+        let emojiContainer = document.createElement("div")
+        emojiContainer.style.display = "flex"
+        emojiContainer.style.flexGrow = "1"
+        emojiContainer.style.justifyContent = "flex-start"
+        emojiContainer.style.width = "100px"
+        emojiContainer.style.height = "43px"
+        let emojiWrapper = document.createElement("div")
+        emojiWrapper.style.display = "flex"
+        emojiWrapper.style.justifyContent = "center"
+        emojiWrapper.style.alignItems = "center"
+        emojiWrapper.style.alignSelf = "flex-start"
+        emojiWrapper.style.width = "55px"
+        emojiWrapper.style.height = "43px"
+        emojiWrapper.style.backgroundColor = " #6D6D6D8A"
+        emojiWrapper.style.boxShadow = "0px 4px 4px 0px #00000040"
+        emojiWrapper.style.borderRadius = "15px"
+        let emoji = selectConcept.querySelector(".emoji")
+        emojiWrapper.innerText = emoji.innerText
+        emojiWrapper.style.fontSize = "2.3rem"
+        emojiWrapper.style.textAlign = "center"
+
+        let categoryWrapper = document.createElement("div")
+        categoryWrapper.style.flexGrow = "1"
+        let category = document.createElement("p")
+        category.innerText = textConcept.innerText
+        category.style.fontSize = "0.9rem"
+        category.style.color = "#FFFFFF"
+        category.style.fontWeight = "400"
+
+        let amountWrapper = document.createElement("div")
+        amountWrapper.style.flexGrow = "2"
+        let amount = document.createElement("p")
+        amount.classList.add("item-amount-text")
+        amount.innerText = `${inputText.value} €`
+        amount.style.fontSize = "1.1rem"
+        amount.style.textAlign = "right"
+        amount.style.color = parseFloat(inputText.value) > 0 ? "var(--income-color)" : "var(--expenses-color)"
+        amount.style.fontWeight = "500"
+        amount.style.textShadow = "0px 4px 4px 0px #00000040"
+
+        emojiContainer.appendChild(emojiWrapper)
+        itemWrapper.appendChild(emojiContainer)
+        categoryWrapper.appendChild(category)
+        itemWrapper.appendChild(categoryWrapper)
+        itemWrapper.appendChild(amountWrapper)
+        amountWrapper.appendChild(amount)
+        cardPlaceholder.appendChild(itemContainer)
+        //insert as first child
+        itemContainer.insertBefore(itemWrapper, itemContainer.firstChild)
+    }
+
 }
 
-function editIems () {  
+function editIems() {
     let itemsList = document.getElementsByClassName("item-wrapper")
-   
+
     for (let item of itemsList) {
         //check if already has a removebutton
         if (!item.querySelector("button")) {
@@ -211,7 +212,7 @@ function editIems () {
             removeButton.style.border = "none"
             removeButton.style.cursor = "pointer"
             removeButton.style.borderRadius = "50%"
-            removeButton.style.boxShadow = "0px 4px 4px 0px #00000040" 
+            removeButton.style.boxShadow = "0px 4px 4px 0px #00000040"
             removeButton.style.margin = "10px"
             let horizontalLine = document.createElement("hr")
             horizontalLine.style.width = "15px"
@@ -219,26 +220,55 @@ function editIems () {
             horizontalLine.style.border = "none"
             horizontalLine.style.backgroundColor = "#FFFFFF"
             horizontalLine.style.padding = "0"
-            
+
             removeButton.append(horizontalLine)
-            item.insertBefore(removeButton, item.firstChild) 
+            item.insertBefore(removeButton, item.firstChild)
             //add event listener for each button
-            removeButton.addEventListener("click",(event) => {
+            removeButton.addEventListener("click", (event) => {
+                let inputText = document.getElementById("amount")
+                let inputNumber = parseFloat(inputText.value)
+
+                let itemWrapper = removeButton.parentElement
+                let itemAmountText = document.querySelector(".item-amount-text")
+                let incomeUI = document.querySelector(".income-amount")
+                let expensesUI = document.querySelector(".expenses-amount")
+                let savings = document.querySelector(".amount-savings")
+                //after UI income expenses
+                let incomeTotal = parseFloat(incomeUI.innerText.replace("€", ""))
+                let expensesTotal = parseFloat(expensesUI.innerText.replace("€", ""))
+                let savingsTotal = parseFloat(savings.innerText.replace("€", ""))
+
+                if (parseFloat(itemWrapper.querySelector(".item-amount-text").innerText) < 0) {
+                    //restar del total y restar de las expenses
+                    savingsTotal = savingsTotal - inputNumber
+                    expensesTotal = Math.abs(inputNumber + expensesTotal)
+                    expensesUI.innerText = `${parseFloat(expensesTotal).toFixed(2)}€`
+                    savings.innerText = `${parseFloat(incomeTotal + expensesTotal).toFixed(2)}€`
+                } else {
+                    //restar del total y restar del income
+                    incomeTotal = incomeTotal - inputNumber
+                    savingsTotal = savingsTotal - inputNumber
+                    incomeUI.innerText = `${parseFloat(incomeTotal).toFixed(2)}€`
+                    savings.innerText = `${parseFloat(incomeTotal - incomeTotal).toFixed(2)}€`
+                    
+                }
+
                 removeButton.parentElement.remove()
-             }) 
+
+            })
         }
-            
+
     }
-    
-   
+
+
 }
 
-function removeEditUI () {
+function removeEditUI() {
     let buttons = document.querySelectorAll(".removeButton")
-    
+
     for (let button of buttons) {
         button.remove()
     }
-    
+
 }
 
