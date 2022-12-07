@@ -70,8 +70,10 @@
 
 .income-amount {
   padding: 5px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 500;
+  max-width: 150px;
+  overflow: hidden;
   color: var(--income-color);
 }
 .expenses-wrapper{
@@ -85,8 +87,10 @@
 
 .expenses-amount{
   padding: 5px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 500;
+  max-width: 150px;
+  overflow:hidden;
   color: var(--expenses-color);
 }
 
