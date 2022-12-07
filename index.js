@@ -225,8 +225,6 @@ function editIems() {
             item.insertBefore(removeButton, item.firstChild)
             //add event listener for each button
             removeButton.addEventListener("click", (event) => {
-                let inputText = document.getElementById("amount")
-                let inputNumber = parseFloat(inputText.value)
 
                 let itemWrapper = removeButton.parentElement
                 let itemAmountText = document.querySelector(".item-amount-text")
@@ -237,19 +235,21 @@ function editIems() {
                 let incomeTotal = parseFloat(incomeUI.innerText.replace("€", ""))
                 let expensesTotal = parseFloat(expensesUI.innerText.replace("€", ""))
                 let savingsTotal = parseFloat(savings.innerText.replace("€", ""))
-
-                if (parseFloat(itemWrapper.querySelector(".item-amount-text").innerText) < 0) {
-                    //restar del total y restar de las expenses
-                    savingsTotal = savingsTotal - inputNumber
-                    expensesTotal = Math.abs(inputNumber + expensesTotal)
-                    expensesUI.innerText = `${parseFloat(expensesTotal).toFixed(2)}€`
-                    savings.innerText = `${parseFloat(incomeTotal + expensesTotal).toFixed(2)}€`
-                } else {
-                    //restar del total y restar del income
-                    incomeTotal = incomeTotal - inputNumber
-                    savingsTotal = savingsTotal - inputNumber
+                // get .item-amount-text  
+                if (parseFloat(itemWrapper.querySelector(".item-amount-text").innerText) > 0) {
+                    //income removed
+                    let inputAmount = parseFloat(itemWrapper.querySelector(".item-amount-text").innerText.replace("€", ""))
+                    incomeTotal =  incomeTotal - inputAmount 
                     incomeUI.innerText = `${parseFloat(incomeTotal).toFixed(2)}€`
-                    savings.innerText = `${parseFloat(incomeTotal - incomeTotal).toFixed(2)}€`
+                    savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
+                    
+                } else {
+                    //expenses removed
+                    let inputAmount = parseFloat(itemWrapper.querySelector(".item-amount-text").innerText.replace("€", ""))
+                    expensesTotal =  expensesTotal + inputAmount 
+                    expensesUI.innerText = `${parseFloat(expensesTotal).toFixed(2)}€`
+                    savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
+                    
                     
                 }
 
