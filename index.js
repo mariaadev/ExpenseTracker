@@ -77,7 +77,7 @@ addTransaction.addEventListener("click", (event) => {
     event.preventDefault()
     //input values
     let inputText = document.getElementById("amount")
-    let inputNumber = parseFloat(inputText.value)
+    
     //before UI income expenses
     let incomeUI = document.querySelector(".income-amount")
     let expensesUI = document.querySelector(".expenses-amount")
@@ -89,7 +89,8 @@ addTransaction.addEventListener("click", (event) => {
 
     let input = document.querySelector("input")
     let concept = document.querySelector("#select-concept")
-    if (inputNumber && isConceptSelected) {
+    if (Number(inputText.value) && isConceptSelected) {
+        let inputNumber = parseFloat(inputText.value)
         if (inputNumber > 0) {
             incomeTotal = inputNumber + incomeTotal
             incomeUI.innerText = `${parseFloat(incomeTotal).toFixed(2)}€`
@@ -271,4 +272,13 @@ function removeEditUI() {
     }
 
 }
+
+
+
+// local Storage
+
+//input amount
+
+
+//input category
 
