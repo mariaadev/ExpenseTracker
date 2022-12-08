@@ -13,10 +13,32 @@ let cardPlaceholder = document.querySelector(".card-placeholder")
 let cardText = document.querySelector(".card-text")
 let cardEmojisPlaceholder = document.querySelector(".emojis-placeholder")
 let itemContainer = document.createElement("ul")
-itemContainer.style.overflowY = "scroll"
-itemContainer.style.overflowX = "hidden"
+
+    
+ //before UI income expenses
+ let incomeUI = document.querySelector(".income-amount")
+ let expensesUI = document.querySelector(".expenses-amount")
+ let savings = document.querySelector(".amount-savings")
+ //after UI income expenses
+ let incomeTotal = parseFloat(incomeUI.innerText.replace("€", ""))
+ let expensesTotal = parseFloat(expensesUI.innerText.replace("€", ""))
+ let savingsTotal = parseFloat(savings.innerText.replace("€", ""))
+
+ let input = document.querySelector("input")
+ let concept = document.querySelector("#select-concept")
+
+ //input values
+ let inputText = document.getElementById("amount")
+ let textConcept = document.querySelector(".text-concept")
+ let emoji = document.querySelector(".emoji")
+
 let listItemsSaved = []
-let savings = document.querySelector(".amount-savings")
+let item = {
+    amount: undefined,
+    category: undefined,
+    emoji: undefined
+}
+
 
 //placeholder when no list items
 if (parseInt(savings.innerText) <= 0) {
@@ -92,35 +114,32 @@ let addTransaction = document.querySelector(".submit-button")
 addTransaction.addEventListener("click", (event) => {
     // check input is a number, if it is positive or negative and sum totals
     event.preventDefault()
-    //input values
-    let inputText = document.getElementById("amount")
-    
-    //before UI income expenses
-    let incomeUI = document.querySelector(".income-amount")
-    let expensesUI = document.querySelector(".expenses-amount")
-    let savings = document.querySelector(".amount-savings")
-    //after UI income expenses
-    let incomeTotal = parseFloat(incomeUI.innerText.replace("€", ""))
-    let expensesTotal = parseFloat(expensesUI.innerText.replace("€", ""))
-    let savingsTotal = parseFloat(savings.innerText.replace("€", ""))
-
-    let input = document.querySelector("input")
-    let concept = document.querySelector("#select-concept")
+   
     if (Number(inputText.value) && isConceptSelected) {
         let inputNumber = parseFloat(inputText.value)
         if (inputNumber > 0) {
             incomeTotal = inputNumber + incomeTotal
             incomeUI.innerText = `${parseFloat(incomeTotal).toFixed(2)}€`
             savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
-            addItem()
+            //pasar a item el objeto CATEGORY
+            item.amount = inputText.value
+            item.category = selectConcept.querySelector(".text-concept").innerText
+            item.emoji = selectConcept.querySelector(".emoji").innerText
+            console.log(item)
+            addItem(item)
             input.style.border = "none"
             concept.style.border = "none"
+            
         }
         else {
             expensesTotal = Math.abs(inputNumber - expensesTotal)
             expensesUI.innerText = `${parseFloat(expensesTotal).toFixed(2)}€`
             savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
-            addItem()
+            item.amount = inputText.value
+            item.category = selectConcept.querySelector(".text-concept").innerText
+            item.emoji = selectConcept.querySelector(".emoji").innerText
+            console.log(item)
+            addItem(item)
             input.style.border = "none"
             concept.style.border = "none"
         }
@@ -140,13 +159,15 @@ function saveData() {
     //then for each item display item
     
 }
-function addItem() {
-    let inputText = document.getElementById("amount")
-    let textConcept = document.querySelector(".text-concept")
+
+function addItem(item) {
+   
 
     if (isConceptSelected) {
         cardText.remove()
         cardEmojisPlaceholder.remove()
+        itemContainer.style.overflowY = "scroll"
+        itemContainer.style.overflowX = "hidden"
         let itemWrapper = document.createElement("li")
         itemWrapper.classList.add("item-wrapper")
         itemWrapper.style.backgroundColor = "#6D6D6D8A"
@@ -176,15 +197,15 @@ function addItem() {
         emojiWrapper.style.backgroundColor = " #6D6D6D8A"
         emojiWrapper.style.boxShadow = "0px 4px 4px 0px #00000040"
         emojiWrapper.style.borderRadius = "15px"
-        let emoji = selectConcept.querySelector(".emoji")
-        emojiWrapper.innerText = emoji.innerText
+        
+        emojiWrapper.innerText = item.emoji
         emojiWrapper.style.fontSize = "2.3rem"
         emojiWrapper.style.textAlign = "center"
 
         let categoryWrapper = document.createElement("div")
         categoryWrapper.style.flexGrow = "1"
         let category = document.createElement("p")
-        category.innerText = textConcept.innerText
+        category.innerText = item.category
         category.style.fontSize = "0.9rem"
         category.style.color = "#FFFFFF"
         category.style.fontWeight = "400"
@@ -193,10 +214,10 @@ function addItem() {
         amountWrapper.style.flexGrow = "2"
         let amount = document.createElement("p")
         amount.classList.add("item-amount-text")
-        amount.innerText = `${inputText.value} €`
+        amount.innerText = `${item.amount} €`
         amount.style.fontSize = "1.1rem"
         amount.style.textAlign = "right"
-        amount.style.color = parseFloat(inputText.value) > 0 ? "var(--income-color)" : "var(--expenses-color)"
+        amount.style.color = parseFloat(item.amount) > 0 ? "var(--income-color)" : "var(--expenses-color)"
         amount.style.fontWeight = "500"
         amount.style.textShadow = "0px 4px 4px 0px #00000040"
 
@@ -207,7 +228,6 @@ function addItem() {
         itemWrapper.appendChild(amountWrapper)
         amountWrapper.appendChild(amount)
         cardPlaceholder.appendChild(itemContainer)
-        saveData()
         //insert as first child
         itemContainer.insertBefore(itemWrapper, itemContainer.firstChild)
     }
