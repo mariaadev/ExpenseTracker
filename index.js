@@ -1,5 +1,6 @@
 /* Click event select concept menu*/
 
+
 let selectConcept = document.getElementById("select-concept");
 let selectText = document.getElementById("select-text");
 let options = document.getElementsByClassName("options");
@@ -34,6 +35,7 @@ let itemContainer = document.createElement("ul")
 
 let listItemsSaved = []
 let item = {
+    id: 0,
     amount: undefined,
     category: undefined,
     emoji: undefined
@@ -267,13 +269,6 @@ function editIems() {
 
                 let itemWrapper = removeButton.parentElement
                 let itemAmountText = document.querySelector(".item-amount-text")
-                let incomeUI = document.querySelector(".income-amount")
-                let expensesUI = document.querySelector(".expenses-amount")
-                let savings = document.querySelector(".amount-savings")
-                //after UI income expenses
-                let incomeTotal = parseFloat(incomeUI.innerText.replace("€", ""))
-                let expensesTotal = parseFloat(expensesUI.innerText.replace("€", ""))
-                let savingsTotal = parseFloat(savings.innerText.replace("€", ""))
                 // get .item-amount-text  
                 if (parseFloat(itemWrapper.querySelector(".item-amount-text").innerText) > 0) {
                     //income removed
@@ -292,7 +287,7 @@ function editIems() {
                     
                 }
 
-                removeButton.parentElement.remove()
+                itemWrapper.remove()
 
             })
         }
