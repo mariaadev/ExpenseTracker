@@ -8,6 +8,23 @@ options = Array.from(options);
 let conceptList = document.getElementById("concept-list");
 let isConceptSelected = false
 
+
+let cardPlaceholder = document.querySelector(".card-placeholder")
+let cardText = document.querySelector(".card-text")
+let cardEmojisPlaceholder = document.querySelector(".emojis-placeholder")
+let itemContainer = document.createElement("ul")
+itemContainer.style.overflowY = "scroll"
+itemContainer.style.overflowX = "hidden"
+let listItemsSaved = []
+let savings = document.querySelector(".amount-savings")
+
+//placeholder when no list items
+if (parseInt(savings.innerText) <= 0) {
+    cardText.classList.toggle("show")
+    cardEmojisPlaceholder.classList.toggle("show")
+}
+
+showData()
 selectConcept.addEventListener("click", (event) => {
     conceptList.classList.toggle("hide");
 })
@@ -115,14 +132,14 @@ addTransaction.addEventListener("click", (event) => {
 })
 
 
-let cardPlaceholder = document.querySelector(".card-placeholder")
-let cardText = document.querySelector(".card-text")
-let cardEmojisPlaceholder = document.querySelector(".emojis-placeholder")
-let itemContainer = document.createElement("ul")
-itemContainer.style.overflowY = "scroll"
-itemContainer.style.overflowX = "hidden"
-
-
+function showData() {
+   
+}
+function saveData() {
+    //save text and category on array
+    //then for each item display item
+    
+}
 function addItem() {
     let inputText = document.getElementById("amount")
     let textConcept = document.querySelector(".text-concept")
@@ -190,6 +207,7 @@ function addItem() {
         itemWrapper.appendChild(amountWrapper)
         amountWrapper.appendChild(amount)
         cardPlaceholder.appendChild(itemContainer)
+        saveData()
         //insert as first child
         itemContainer.insertBefore(itemWrapper, itemContainer.firstChild)
     }

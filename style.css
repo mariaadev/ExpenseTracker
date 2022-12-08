@@ -219,6 +219,7 @@
 }
 
 .card-text {
+  display: none;
   color: #FFFFFF;
   font-size: 1.3rem;
   text-align: center;
@@ -227,8 +228,13 @@
 }
 
 .emojis-placeholder {
+  display: none;
   font-size: 4em;
   text-align: center;
+}
+
+.show {
+  display: inline-block;
 }
 
 .selector {
