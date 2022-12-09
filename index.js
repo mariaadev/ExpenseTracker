@@ -109,6 +109,9 @@ doneButton.addEventListener("click", (event) => {
 })
 
 
+function clearInput () {
+    inputText.value = ""
+}
 
 //button
 let addTransaction = document.querySelector(".submit-button")
@@ -131,6 +134,7 @@ addTransaction.addEventListener("click", (event) => {
             addItem(item)
             input.style.border = "none"
             concept.style.border = "none"
+            clearInput()
             
         }
         else {
@@ -144,6 +148,7 @@ addTransaction.addEventListener("click", (event) => {
             addItem(item)
             input.style.border = "none"
             concept.style.border = "none"
+            clearInput()
         }
     } else {
         input.style.border = "1px solid red"
