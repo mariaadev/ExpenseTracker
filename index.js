@@ -168,7 +168,7 @@ function addItem(item) {
     if (isConceptSelected) {
         cardText.remove()
         cardEmojisPlaceholder.remove()
-        itemContainer.style.overflowY = "scroll"
+        itemContainer.style.overflowY = "auto"
         itemContainer.style.overflowX = "hidden"
         let itemWrapper = document.createElement("li")
         itemWrapper.classList.add("item-wrapper")

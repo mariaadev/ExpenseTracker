@@ -233,17 +233,18 @@
   text-align: center;
 }
 
-.show {
-  display: inline-block;
-}
 
 .selector {
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: scroll;
+
 }
 
+
+.show {
+  display: inline-block;
+}
 
 #select-concept{
   display: flex;
@@ -274,10 +275,12 @@
 
 #concept-list{
   width: 360px;
+  height: 100px;
   box-sizing: border-box;
   background-color: #3C515C;
   border-radius: 8px;
   overflow-x: hidden;
+  overflow-y: scroll;
   margin: 15px;
   padding: 10px;
 
