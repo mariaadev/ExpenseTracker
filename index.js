@@ -122,7 +122,13 @@ let addTransaction = document.querySelector(".submit-button")
 addTransaction.addEventListener("click", (event) => {
     // check input is a number, if it is positive or negative and sum totals
     event.preventDefault()
-   
+    let item = {
+        id: 0,
+        amount: inputText.value,
+        category: selectConcept.querySelector(".text-concept").innerText,
+        emoji: selectConcept.querySelector(".emoji").innerText
+    }
+
     if (Number(inputText.value) && isConceptSelected) {
         let inputNumber = parseFloat(inputText.value)
         if (inputNumber > 0) {
@@ -135,11 +141,15 @@ addTransaction.addEventListener("click", (event) => {
             item.emoji = selectConcept.querySelector(".emoji").innerText
             console.log(item)
             addItem(item)
+            console.log(listOfItems)
             input.style.border = "none"
             concept.style.border = "none"
             listOfItems.push(item)
+            console.log(listOfItems)
             saveToLocalStorage(listOfItems)
+            console.log(listOfItems)
             clearInput()
+            console.log(listOfItems)
             
         }
         else {
