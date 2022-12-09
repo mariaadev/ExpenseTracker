@@ -33,7 +33,7 @@ let itemContainer = document.createElement("ul")
  let textConcept = document.querySelector(".text-concept")
  let emoji = document.querySelector(".emoji")
 
-let listItemsSaved = []
+let listOfItems = []
 let item = {
     id: 0,
     amount: undefined,
@@ -48,7 +48,7 @@ if (parseInt(savings.innerText) <= 0) {
     cardEmojisPlaceholder.classList.toggle("show")
 }
 
-showData()
+
 selectConcept.addEventListener("click", (event) => {
     conceptList.classList.toggle("hide");
 })
@@ -108,7 +108,10 @@ doneButton.addEventListener("click", (event) => {
 
 })
 
+function saveToLocalStorage (listOfItems) {
+    localStorage.setItem("listOfItems", JSON.stringify(listOfItems))
 
+}
 function clearInput () {
     inputText.value = ""
 }
@@ -134,6 +137,8 @@ addTransaction.addEventListener("click", (event) => {
             addItem(item)
             input.style.border = "none"
             concept.style.border = "none"
+            listOfItems.push(item)
+            saveToLocalStorage(listOfItems)
             clearInput()
             
         }
@@ -148,6 +153,9 @@ addTransaction.addEventListener("click", (event) => {
             addItem(item)
             input.style.border = "none"
             concept.style.border = "none"
+            listOfItems.push(item)
+            saveToLocalStorage(listOfItems)
+            console.log(listOfItems)
             clearInput()
         }
     } else {
@@ -158,14 +166,7 @@ addTransaction.addEventListener("click", (event) => {
 })
 
 
-function showData() {
-   
-}
-function saveData() {
-    //save text and category on array
-    //then for each item display item
-    
-}
+
 
 function addItem(item) {
    
