@@ -45,10 +45,10 @@ let isDoneMenu = false
 //button
 let addTransaction = document.querySelector(".submit-button")
 
-
+let counter = 0
 let listOfItems = []
 let item = {
-    id: 0,
+    id: counter,
     amount: undefined,
     category: undefined,
     emoji: undefined
@@ -69,7 +69,7 @@ function clearInput() {
 
 
 function addItem(item) {
-
+    
     cardText.remove()
     cardEmojisPlaceholder.remove()
     itemContainer.style.overflowY = "auto"
@@ -211,9 +211,10 @@ doneButton.addEventListener("click", (event) => {
 
 addTransaction.addEventListener("click", (event) => {
     // check input is a number, if it is positive or negative and sum totals
+    counter +=1
     event.preventDefault()
     let item = {
-        id: 0,
+        id: counter,
         amount: inputText.value,
         category: selectConcept.querySelector(".text-concept").innerText,
         emoji: selectConcept.querySelector(".emoji").innerText
@@ -308,10 +309,9 @@ function editIems() {
 
 
                 }
-
+                console.log()
                 itemWrapper.remove()
-
-
+                
             })
         }
 
