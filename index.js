@@ -266,6 +266,7 @@ function editIems() {
         //check if already has a removebutton
         if (!item.querySelector("button")) {
             let removeButton = document.createElement("button")
+            removeButton.setAttribute("id", `${item.id}`)
             removeButton.classList.add("removeButton")
             removeButton.style.display = "flex"
             removeButton.style.justifyContent = "center"
@@ -309,8 +310,10 @@ function editIems() {
 
 
                 }
-                console.log()
                 itemWrapper.remove()
+                listOfItems.splice(item.id - 1,1)
+                saveToLocalStorage(listOfItems)
+                
                 
             })
         }
