@@ -15,23 +15,36 @@ let cardText = document.querySelector(".card-text")
 let cardEmojisPlaceholder = document.querySelector(".emojis-placeholder")
 let itemContainer = document.createElement("ul")
 
-    
- //before UI income expenses
- let incomeUI = document.querySelector(".income-amount")
- let expensesUI = document.querySelector(".expenses-amount")
- let savings = document.querySelector(".amount-savings")
- //after UI income expenses
- let incomeTotal = parseFloat(incomeUI.innerText.replace("€", ""))
- let expensesTotal = parseFloat(expensesUI.innerText.replace("€", ""))
- let savingsTotal = parseFloat(savings.innerText.replace("€", ""))
 
- let input = document.querySelector("input")
- let concept = document.querySelector("#select-concept")
+//before UI income expenses
+let incomeUI = document.querySelector(".income-amount")
+let expensesUI = document.querySelector(".expenses-amount")
+let savings = document.querySelector(".amount-savings")
+//after UI income expenses
+let incomeTotal = parseFloat(incomeUI.innerText.replace("€", ""))
+let expensesTotal = parseFloat(expensesUI.innerText.replace("€", ""))
+let savingsTotal = parseFloat(savings.innerText.replace("€", ""))
 
- //input values
- let inputText = document.getElementById("amount")
- let textConcept = document.querySelector(".text-concept")
- let emoji = document.querySelector(".emoji")
+let input = document.querySelector("input")
+let concept = document.querySelector("#select-concept")
+
+//input values
+let inputText = document.getElementById("amount")
+let textConcept = document.querySelector(".text-concept")
+let emoji = document.querySelector(".emoji")
+
+let editMenu = document.querySelector(".edit-menu-wrapper");
+let doneMenu = document.querySelector(".done-menu-wrapper")
+
+let meatballButton = document.querySelector(".meatball-menu");
+let editButton = document.querySelector(".edit")
+let cancelButton = document.querySelector(".cancel")
+let doneButton = document.querySelector(".done")
+let isDoneMenu = false
+
+//button
+let addTransaction = document.querySelector(".submit-button")
+
 
 let listOfItems = []
 let item = {
@@ -41,6 +54,104 @@ let item = {
     emoji: undefined
 }
 
+
+function getFromLocalStorage() {
+    return JSON.parse(localStorage.getItem("listOfItems"))
+}
+
+function saveToLocalStorage(listOfItems) {
+    localStorage.setItem("listOfItems", JSON.stringify(listOfItems))
+
+}
+function clearInput() {
+    inputText.value = ""
+}
+
+
+function addItem(item) {
+
+    cardText.remove()
+    cardEmojisPlaceholder.remove()
+    itemContainer.style.overflowY = "auto"
+    itemContainer.style.overflowX = "hidden"
+    let itemWrapper = document.createElement("li")
+    itemWrapper.classList.add("item-wrapper")
+    itemWrapper.style.backgroundColor = "#6D6D6D8A"
+    itemWrapper.style.width = "300px"
+    itemWrapper.style.height = "50px"
+    itemWrapper.style.borderRadius = "15px"
+    itemWrapper.style.boxShadow = "0px 4px 4px 0px #00000040"
+    itemWrapper.style.display = "flex"
+    itemWrapper.style.justifyContent = "space-around"
+    itemWrapper.style.alignItems = "center"
+    itemWrapper.style.padding = "7px"
+    itemWrapper.style.margin = "7px"
+
+    let emojiContainer = document.createElement("div")
+    emojiContainer.style.display = "flex"
+    emojiContainer.style.flexGrow = "1"
+    emojiContainer.style.justifyContent = "flex-start"
+    emojiContainer.style.width = "100px"
+    emojiContainer.style.height = "43px"
+    let emojiWrapper = document.createElement("div")
+    emojiWrapper.style.display = "flex"
+    emojiWrapper.style.justifyContent = "center"
+    emojiWrapper.style.alignItems = "center"
+    emojiWrapper.style.alignSelf = "flex-start"
+    emojiWrapper.style.width = "55px"
+    emojiWrapper.style.height = "43px"
+    emojiWrapper.style.backgroundColor = " #6D6D6D8A"
+    emojiWrapper.style.boxShadow = "0px 4px 4px 0px #00000040"
+    emojiWrapper.style.borderRadius = "15px"
+
+    emojiWrapper.innerText = item.emoji
+    emojiWrapper.style.fontSize = "2.3rem"
+    emojiWrapper.style.textAlign = "center"
+
+    let categoryWrapper = document.createElement("div")
+    categoryWrapper.style.flexGrow = "1"
+    let category = document.createElement("p")
+    category.innerText = item.category
+    category.style.fontSize = "0.9rem"
+    category.style.color = "#FFFFFF"
+    category.style.fontWeight = "400"
+
+    let amountWrapper = document.createElement("div")
+    amountWrapper.style.flexGrow = "2"
+    let amount = document.createElement("p")
+    amount.classList.add("item-amount-text")
+    amount.innerText = `${item.amount} €`
+    amount.style.fontSize = "1.1rem"
+    amount.style.textAlign = "right"
+    amount.style.color = parseFloat(item.amount) > 0 ? "var(--income-color)" : "var(--expenses-color)"
+    amount.style.fontWeight = "500"
+    amount.style.textShadow = "0px 4px 4px 0px #00000040"
+
+    emojiContainer.appendChild(emojiWrapper)
+    itemWrapper.appendChild(emojiContainer)
+    categoryWrapper.appendChild(category)
+    itemWrapper.appendChild(categoryWrapper)
+    itemWrapper.appendChild(amountWrapper)
+    amountWrapper.appendChild(amount)
+    cardPlaceholder.appendChild(itemContainer)
+    //insert as first child
+    itemContainer.insertBefore(itemWrapper, itemContainer.firstChild)
+}
+
+//if there is data saved on local storage, get it from there
+listOfItems = getFromLocalStorage() == null ? listOfItems : getFromLocalStorage();
+//for each item in listOfItems, draw the item 
+for (let item of listOfItems) {
+    addItem(item)
+    if (parseInt(item.amount) > 0) {
+        incomeTotal = incomeTotal + parseFloat(item.amount)
+        incomeUI.innerText = `${parseFloat(incomeTotal).toFixed(2)}€`
+    } else {
+        expensesTotal = expensesTotal - parseFloat(item.amount)
+        expensesUI.innerText = `${parseFloat(expensesTotal).toFixed(2)}€`
+    }
+    savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`   
+}
 
 //placeholder when no list items
 if (parseInt(savings.innerText) <= 0) {
@@ -63,16 +174,6 @@ options.forEach(option => {
         isConceptSelected = true
     })
 });
-
-let editMenu = document.querySelector(".edit-menu-wrapper");
-let doneMenu = document.querySelector(".done-menu-wrapper")
-
-let meatballButton = document.querySelector(".meatball-menu");
-let editButton = document.querySelector(".edit")
-let cancelButton = document.querySelector(".cancel")
-let doneButton = document.querySelector(".done")
-let isDoneMenu = false
-
 
 meatballButton.addEventListener("click", (event) => {
     if (isDoneMenu) {
@@ -108,17 +209,6 @@ doneButton.addEventListener("click", (event) => {
 
 })
 
-function saveToLocalStorage (listOfItems) {
-    localStorage.setItem("listOfItems", JSON.stringify(listOfItems))
-
-}
-function clearInput () {
-    inputText.value = ""
-}
-
-//button
-let addTransaction = document.querySelector(".submit-button")
-
 addTransaction.addEventListener("click", (event) => {
     // check input is a number, if it is positive or negative and sum totals
     event.preventDefault()
@@ -139,18 +229,13 @@ addTransaction.addEventListener("click", (event) => {
             item.amount = inputText.value
             item.category = selectConcept.querySelector(".text-concept").innerText
             item.emoji = selectConcept.querySelector(".emoji").innerText
-            console.log(item)
+
             addItem(item)
-            console.log(listOfItems)
             input.style.border = "none"
             concept.style.border = "none"
             listOfItems.push(item)
-            console.log(listOfItems)
             saveToLocalStorage(listOfItems)
-            console.log(listOfItems)
             clearInput()
-            console.log(listOfItems)
-            
         }
         else {
             expensesTotal = Math.abs(inputNumber - expensesTotal)
@@ -159,13 +244,11 @@ addTransaction.addEventListener("click", (event) => {
             item.amount = inputText.value
             item.category = selectConcept.querySelector(".text-concept").innerText
             item.emoji = selectConcept.querySelector(".emoji").innerText
-            console.log(item)
             addItem(item)
             input.style.border = "none"
             concept.style.border = "none"
             listOfItems.push(item)
             saveToLocalStorage(listOfItems)
-            console.log(listOfItems)
             clearInput()
         }
     } else {
@@ -174,83 +257,6 @@ addTransaction.addEventListener("click", (event) => {
     }
 
 })
-
-
-
-
-function addItem(item) {
-   
-
-    if (isConceptSelected) {
-        cardText.remove()
-        cardEmojisPlaceholder.remove()
-        itemContainer.style.overflowY = "auto"
-        itemContainer.style.overflowX = "hidden"
-        let itemWrapper = document.createElement("li")
-        itemWrapper.classList.add("item-wrapper")
-        itemWrapper.style.backgroundColor = "#6D6D6D8A"
-        itemWrapper.style.width = "300px"
-        itemWrapper.style.height = "50px"
-        itemWrapper.style.borderRadius = "15px"
-        itemWrapper.style.boxShadow = "0px 4px 4px 0px #00000040"
-        itemWrapper.style.display = "flex"
-        itemWrapper.style.justifyContent = "space-around"
-        itemWrapper.style.alignItems = "center"
-        itemWrapper.style.padding = "7px"
-        itemWrapper.style.margin = "7px"
-
-        let emojiContainer = document.createElement("div")
-        emojiContainer.style.display = "flex"
-        emojiContainer.style.flexGrow = "1"
-        emojiContainer.style.justifyContent = "flex-start"
-        emojiContainer.style.width = "100px"
-        emojiContainer.style.height = "43px"
-        let emojiWrapper = document.createElement("div")
-        emojiWrapper.style.display = "flex"
-        emojiWrapper.style.justifyContent = "center"
-        emojiWrapper.style.alignItems = "center"
-        emojiWrapper.style.alignSelf = "flex-start"
-        emojiWrapper.style.width = "55px"
-        emojiWrapper.style.height = "43px"
-        emojiWrapper.style.backgroundColor = " #6D6D6D8A"
-        emojiWrapper.style.boxShadow = "0px 4px 4px 0px #00000040"
-        emojiWrapper.style.borderRadius = "15px"
-        
-        emojiWrapper.innerText = item.emoji
-        emojiWrapper.style.fontSize = "2.3rem"
-        emojiWrapper.style.textAlign = "center"
-
-        let categoryWrapper = document.createElement("div")
-        categoryWrapper.style.flexGrow = "1"
-        let category = document.createElement("p")
-        category.innerText = item.category
-        category.style.fontSize = "0.9rem"
-        category.style.color = "#FFFFFF"
-        category.style.fontWeight = "400"
-
-        let amountWrapper = document.createElement("div")
-        amountWrapper.style.flexGrow = "2"
-        let amount = document.createElement("p")
-        amount.classList.add("item-amount-text")
-        amount.innerText = `${item.amount} €`
-        amount.style.fontSize = "1.1rem"
-        amount.style.textAlign = "right"
-        amount.style.color = parseFloat(item.amount) > 0 ? "var(--income-color)" : "var(--expenses-color)"
-        amount.style.fontWeight = "500"
-        amount.style.textShadow = "0px 4px 4px 0px #00000040"
-
-        emojiContainer.appendChild(emojiWrapper)
-        itemWrapper.appendChild(emojiContainer)
-        categoryWrapper.appendChild(category)
-        itemWrapper.appendChild(categoryWrapper)
-        itemWrapper.appendChild(amountWrapper)
-        amountWrapper.appendChild(amount)
-        cardPlaceholder.appendChild(itemContainer)
-        //insert as first child
-        itemContainer.insertBefore(itemWrapper, itemContainer.firstChild)
-    }
-
-}
 
 function editIems() {
     let itemsList = document.getElementsByClassName("item-wrapper")
@@ -289,21 +295,22 @@ function editIems() {
                 if (parseFloat(itemWrapper.querySelector(".item-amount-text").innerText) > 0) {
                     //income removed
                     let inputAmount = parseFloat(itemWrapper.querySelector(".item-amount-text").innerText.replace("€", ""))
-                    incomeTotal =  incomeTotal - inputAmount 
+                    incomeTotal = incomeTotal - inputAmount
                     incomeUI.innerText = `${parseFloat(incomeTotal).toFixed(2)}€`
                     savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
-                    
+
                 } else {
                     //expenses removed
                     let inputAmount = parseFloat(itemWrapper.querySelector(".item-amount-text").innerText.replace("€", ""))
-                    expensesTotal =  expensesTotal + inputAmount 
+                    expensesTotal = expensesTotal + inputAmount
                     expensesUI.innerText = `${parseFloat(expensesTotal).toFixed(2)}€`
                     savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
-                    
-                    
+
+
                 }
 
                 itemWrapper.remove()
+
 
             })
         }
