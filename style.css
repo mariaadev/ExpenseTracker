@@ -219,7 +219,7 @@
 }
 
 .card-text {
-  display: none;
+  display: inline-block;
   color: #FFFFFF;
   font-size: 1.3rem;
   text-align: center;
@@ -228,7 +228,7 @@
 }
 
 .emojis-placeholder {
-  display: none;
+  display: inline-block;
   font-size: 4em;
   text-align: center;
 }
@@ -243,7 +243,7 @@
 
 
 .show {
-  display: inline-block;
+  display: none;
 }
 
 #select-concept{

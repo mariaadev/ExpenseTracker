@@ -33,6 +33,8 @@ let inputText = document.getElementById("amount")
 let textConcept = document.querySelector(".text-concept")
 let emoji = document.querySelector(".emoji")
 
+let itemsList = document.getElementsByClassName("item-wrapper")
+
 let editMenu = document.querySelector(".edit-menu-wrapper");
 let doneMenu = document.querySelector(".done-menu-wrapper")
 
@@ -54,6 +56,9 @@ let item = {
     emoji: undefined
 }
 
+// if card placeholder's child ul, has child li, dont show placeholder, else, show.
+
+
 
 function getFromLocalStorage() {
     return JSON.parse(localStorage.getItem("listOfItems"))
@@ -69,9 +74,9 @@ function clearInput() {
 
 
 function addItem(item) {
-    
-    cardText.remove()
-    cardEmojisPlaceholder.remove()
+
+    cardText.style.display = "none"
+    cardEmojisPlaceholder.style.display = "none"
     itemContainer.style.overflowY = "auto"
     itemContainer.style.overflowX = "hidden"
     let itemWrapper = document.createElement("li")
@@ -138,6 +143,12 @@ function addItem(item) {
     itemContainer.insertBefore(itemWrapper, itemContainer.firstChild)
 }
 
+
+
+
+
+
+
 //if there is data saved on local storage, get it from there
 listOfItems = getFromLocalStorage() == null ? listOfItems : getFromLocalStorage();
 //for each item in listOfItems, draw the item 
@@ -150,14 +161,9 @@ for (let item of listOfItems) {
         expensesTotal = expensesTotal - parseFloat(item.amount)
         expensesUI.innerText = `${parseFloat(expensesTotal).toFixed(2)}€`
     }
-    savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`   
+    savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
 }
 
-//placeholder when no list items
-if (parseInt(savings.innerText) <= 0) {
-    cardText.classList.toggle("show")
-    cardEmojisPlaceholder.classList.toggle("show")
-}
 
 
 selectConcept.addEventListener("click", (event) => {
@@ -211,7 +217,7 @@ doneButton.addEventListener("click", (event) => {
 
 addTransaction.addEventListener("click", (event) => {
     // check input is a number, if it is positive or negative and sum totals
-    counter +=1
+    counter += 1
     event.preventDefault()
     let item = {
         id: counter,
@@ -260,7 +266,7 @@ addTransaction.addEventListener("click", (event) => {
 })
 
 function editIems() {
-    let itemsList = document.getElementsByClassName("item-wrapper")
+
 
     for (let item of itemsList) {
         //check if already has a removebutton
@@ -311,10 +317,15 @@ function editIems() {
 
                 }
                 itemWrapper.remove()
-                listOfItems.splice(item.id - 1,1)
+                listOfItems.splice(item.id - 1, 1)
                 saveToLocalStorage(listOfItems)
-                
-                
+
+                if (itemsList.length === 0) {
+                    cardText.style.display = "inline-block"
+                    cardEmojisPlaceholder.style.display = "inline-block"
+                }
+
+
             })
         }
 
