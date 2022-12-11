@@ -56,8 +56,6 @@ let item = {
     emoji: undefined
 }
 
-// if card placeholder's child ul, has child li, dont show placeholder, else, show.
-
 
 
 function getFromLocalStorage() {
@@ -151,6 +149,7 @@ function addItem(item) {
 
 //if there is data saved on local storage, get it from there
 listOfItems = getFromLocalStorage() == null ? listOfItems : getFromLocalStorage();
+
 //for each item in listOfItems, draw the item 
 for (let item of listOfItems) {
     addItem(item)
@@ -259,8 +258,8 @@ addTransaction.addEventListener("click", (event) => {
             clearInput()
         }
     } else {
-        input.style.border = "1px solid red"
-        concept.style.border = "1px solid red"
+        input.style.border = "2px solid var(--error-color)"
+        concept.style.border = "2px solid var(--error-color)"
     }
 
 })
@@ -342,13 +341,3 @@ function removeEditUI() {
     }
 
 }
-
-
-
-// local Storage
-
-//input amount
-
-
-//input category
-
