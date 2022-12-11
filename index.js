@@ -219,14 +219,14 @@ addTransaction.addEventListener("click", (event) => {
     // check input is a number, if it is positive or negative and sum totals
     counter += 1
     event.preventDefault()
-    let item = {
-        id: counter,
-        amount: inputText.value,
-        category: selectConcept.querySelector(".text-concept").innerText,
-        emoji: selectConcept.querySelector(".emoji").innerText
-    }
-
+   
     if (Number(inputText.value) && isConceptSelected) {
+        let item = {
+            id: counter,
+            amount: inputText.value,
+            category: selectConcept.querySelector(".text-concept").innerText,
+            emoji: selectConcept.querySelector(".emoji").innerText
+        }
         let inputNumber = parseFloat(inputText.value)
         if (inputNumber > 0) {
             incomeTotal = inputNumber + incomeTotal
