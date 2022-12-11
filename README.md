@@ -1,6 +1,9 @@
 # My first official project with Javascript
 This is my second practice with Javascript (and my first official project!)
 
+# View the project
+https://mariaadev.github.io/ExpenseTracker/ 
+
 # Expense Tracker
 This project is an Expense Tracker. You can put all your income and expenses and track all your savings.
 
