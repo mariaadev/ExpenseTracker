@@ -1,13 +1,10 @@
-/* Click event select concept menu*/
-
-
+// Select Category variables
 let selectConcept = document.getElementById("select-concept");
 let selectText = document.getElementById("select-text");
 let options = document.getElementsByClassName("options");
 options = Array.from(options);
-
 let conceptList = document.getElementById("concept-list");
-let isConceptSelected = false
+let isConceptSelected = false;
 
 
 let cardPlaceholder = document.querySelector(".card-placeholder")
@@ -94,7 +91,7 @@ function addItem(item) {
     emojiContainer.style.display = "flex"
     emojiContainer.style.flexGrow = "1"
     emojiContainer.style.justifyContent = "flex-start"
-    emojiContainer.style.width = "100px"
+    emojiContainer.style.margin = "10px"
     emojiContainer.style.height = "43px"
     let emojiWrapper = document.createElement("div")
     emojiWrapper.style.display = "flex"
