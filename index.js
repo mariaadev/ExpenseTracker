@@ -116,6 +116,7 @@ function addItem(item) {
     let category = document.createElement("p")
     category.innerText = item.category
     category.style.fontSize = "0.9rem"
+    category.style.textShadow = "0px 2px 2px #00000040"
     category.style.color = "#FFFFFF"
     category.style.fontWeight = "400"
 
@@ -125,6 +126,7 @@ function addItem(item) {
     amount.classList.add("item-amount-text")
     amount.innerText = parseFloat(item.amount) > 0 ? `+${item.amount}€` : `${item.amount}€`
     amount.style.fontSize = "1.1rem"
+    amount.style.textShadow = "0px 2px 2px #00000040"
     amount.style.textAlign = "right"
     amount.style.color = parseFloat(item.amount) > 0 ? "var(--income-color)" : "var(--expenses-color)"
     amount.style.fontWeight = "500"
