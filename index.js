@@ -84,7 +84,7 @@ function addItem(item) {
     itemWrapper.style.height = "50px"
     itemWrapper.style.borderRadius = "15px"
     itemWrapper.style.boxShadow = "0px 4px 4px 0px #00000040"
-    itemWrapper.style.display = "flex"
+    itemWrapper.style.display = "flex"  
     itemWrapper.style.justifyContent = "space-around"
     itemWrapper.style.alignItems = "center"
     itemWrapper.style.padding = "7px"
@@ -123,7 +123,7 @@ function addItem(item) {
     amountWrapper.style.flexGrow = "2"
     let amount = document.createElement("p")
     amount.classList.add("item-amount-text")
-    amount.innerText = `${item.amount} €`
+    amount.innerText = parseFloat(item.amount) > 0 ? `+${item.amount}€` : `${item.amount}€`
     amount.style.fontSize = "1.1rem"
     amount.style.textAlign = "right"
     amount.style.color = parseFloat(item.amount) > 0 ? "var(--income-color)" : "var(--expenses-color)"
@@ -140,12 +140,6 @@ function addItem(item) {
     //insert as first child
     itemContainer.insertBefore(itemWrapper, itemContainer.firstChild)
 }
-
-
-
-
-
-
 
 //if there is data saved on local storage, get it from there
 listOfItems = getFromLocalStorage() == null ? listOfItems : getFromLocalStorage();
