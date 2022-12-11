@@ -53,8 +53,6 @@ let item = {
     emoji: undefined
 }
 
-
-
 function getFromLocalStorage() {
     return JSON.parse(localStorage.getItem("listOfItems"))
 }
@@ -67,9 +65,7 @@ function clearInput() {
     inputText.value = ""
 }
 
-
 function addItem(item) {
-
     cardText.style.display = "none"
     cardEmojisPlaceholder.style.display = "none"
     itemContainer.style.overflowY = "auto"
@@ -141,126 +137,7 @@ function addItem(item) {
     itemContainer.insertBefore(itemWrapper, itemContainer.firstChild)
 }
 
-//if there is data saved on local storage, get it from there
-listOfItems = getFromLocalStorage() == null ? listOfItems : getFromLocalStorage();
-
-//for each item in listOfItems, draw the item 
-for (let item of listOfItems) {
-    addItem(item)
-    if (parseInt(item.amount) > 0) {
-        incomeTotal = incomeTotal + parseFloat(item.amount)
-        incomeUI.innerText = `${parseFloat(incomeTotal).toFixed(2)}€`
-    } else {
-        expensesTotal = expensesTotal - parseFloat(item.amount)
-        expensesUI.innerText = `${parseFloat(expensesTotal).toFixed(2)}€`
-    }
-    savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
-}
-
-
-
-selectConcept.addEventListener("click", (event) => {
-    conceptList.classList.toggle("hide");
-})
-
-options.forEach(option => {
-    option.addEventListener("click", (event) => {
-        //get emoji and text from selectedOption
-        selectConcept.style.display = "flex"
-        selectConcept.style.justifyContent = "flex-start"
-        selectConcept.innerHTML = option.innerHTML;
-        conceptList.classList.toggle("hide");
-        isConceptSelected = true
-    })
-});
-
-meatballButton.addEventListener("click", (event) => {
-    if (isDoneMenu) {
-        event.stopPropagation()
-    } else {
-        editMenu.classList.toggle("active")
-    }
-
-})
-
-
-
-cancelButton.addEventListener("click", (event) => {
-    editMenu.classList.toggle("active")
-})
-
-editButton.addEventListener("click", (event) => {
-    editIems()
-    isDoneMenu = true
-    editMenu.classList.toggle("active")
-    doneMenu.classList.toggle("active")
-    doneMenu.classList.toggle("top")
-
-
-})
-
-doneButton.addEventListener("click", (event) => {
-    isDoneMenu = false
-    doneMenu.classList.toggle("active")
-    doneMenu.classList.toggle("top")
-    removeEditUI()
-
-
-})
-
-addTransaction.addEventListener("click", (event) => {
-    // check input is a number, if it is positive or negative and sum totals
-    counter += 1
-    event.preventDefault()
-   
-    if (Number(inputText.value) && isConceptSelected) {
-        let item = {
-            id: counter,
-            amount: inputText.value,
-            category: selectConcept.querySelector(".text-concept").innerText,
-            emoji: selectConcept.querySelector(".emoji").innerText
-        }
-        let inputNumber = parseFloat(inputText.value)
-        if (inputNumber > 0) {
-            incomeTotal = inputNumber + incomeTotal
-            incomeUI.innerText = `${parseFloat(incomeTotal).toFixed(2)}€`
-            savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
-            //pasar a item el objeto CATEGORY
-            item.amount = inputText.value
-            item.category = selectConcept.querySelector(".text-concept").innerText
-            item.emoji = selectConcept.querySelector(".emoji").innerText
-
-            addItem(item)
-            input.style.border = "none"
-            concept.style.border = "none"
-            listOfItems.push(item)
-            saveToLocalStorage(listOfItems)
-            clearInput()
-        }
-        else {
-            expensesTotal = Math.abs(inputNumber - expensesTotal)
-            expensesUI.innerText = `${parseFloat(expensesTotal).toFixed(2)}€`
-            savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
-            item.amount = inputText.value
-            item.category = selectConcept.querySelector(".text-concept").innerText
-            item.emoji = selectConcept.querySelector(".emoji").innerText
-            addItem(item)
-            input.style.border = "none"
-            concept.style.border = "none"
-            listOfItems.push(item)
-            saveToLocalStorage(listOfItems)
-            clearInput()
-        }
-    } else {
-        input.style.border = "2px solid var(--error-color)"
-        concept.style.border = "2px solid var(--error-color)"
-    }
-
-})
-
 function editIems() {
-
-
     for (let item of itemsList) {
         //check if already has a removebutton
         if (!item.querySelector("button")) {
@@ -335,3 +212,119 @@ function removeEditUI() {
     }
 
 }
+
+
+//Get data from local storage if it exists
+listOfItems = getFromLocalStorage() == null ? listOfItems : getFromLocalStorage();
+
+//For each item saved on local storage, add an item
+for (let item of listOfItems) {
+    addItem(item)
+    if (parseInt(item.amount) > 0) {
+        incomeTotal = incomeTotal + parseFloat(item.amount)
+        incomeUI.innerText = `${parseFloat(incomeTotal).toFixed(2)}€`
+    } else {
+        expensesTotal = expensesTotal - parseFloat(item.amount)
+        expensesUI.innerText = `${parseFloat(expensesTotal).toFixed(2)}€`
+    }
+    savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
+}
+
+
+selectConcept.addEventListener("click", (event) => {
+    conceptList.classList.toggle("hide");
+})
+
+options.forEach(option => {
+    option.addEventListener("click", (event) => {
+        //get emoji and text from selectedOption
+        selectConcept.style.display = "flex"
+        selectConcept.style.justifyContent = "flex-start"
+        selectConcept.innerHTML = option.innerHTML;
+        conceptList.classList.toggle("hide");
+        isConceptSelected = true
+    })
+});
+
+meatballButton.addEventListener("click", (event) => {
+    if (isDoneMenu) {
+        event.stopPropagation()
+    } else {
+        editMenu.classList.toggle("active")
+    }
+
+})
+
+cancelButton.addEventListener("click", (event) => {
+    editMenu.classList.toggle("active")
+})
+
+editButton.addEventListener("click", (event) => {
+    editIems()
+    isDoneMenu = true
+    editMenu.classList.toggle("active")
+    doneMenu.classList.toggle("active")
+    doneMenu.classList.toggle("top")
+
+
+})
+
+doneButton.addEventListener("click", (event) => {
+    isDoneMenu = false
+    doneMenu.classList.toggle("active")
+    doneMenu.classList.toggle("top")
+    removeEditUI()
+
+
+})
+
+addTransaction.addEventListener("click", (event) => {
+    // check input is a number, if it is positive or negative and sum totals
+    counter += 1
+    event.preventDefault()
+   
+    if (Number(inputText.value) && isConceptSelected) {
+        let item = {
+            id: counter,
+            amount: inputText.value,
+            category: selectConcept.querySelector(".text-concept").innerText,
+            emoji: selectConcept.querySelector(".emoji").innerText
+        }
+        let inputNumber = parseFloat(inputText.value)
+        if (inputNumber > 0) {
+            incomeTotal = inputNumber + incomeTotal
+            incomeUI.innerText = `${parseFloat(incomeTotal).toFixed(2)}€`
+            savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
+            //pasar a item el objeto CATEGORY
+            item.amount = inputText.value
+            item.category = selectConcept.querySelector(".text-concept").innerText
+            item.emoji = selectConcept.querySelector(".emoji").innerText
+
+            addItem(item)
+            input.style.border = "none"
+            concept.style.border = "none"
+            listOfItems.push(item)
+            saveToLocalStorage(listOfItems)
+            clearInput()
+        }
+        else {
+            expensesTotal = Math.abs(inputNumber - expensesTotal)
+            expensesUI.innerText = `${parseFloat(expensesTotal).toFixed(2)}€`
+            savings.innerText = `${parseFloat(incomeTotal - expensesTotal).toFixed(2)}€`
+            item.amount = inputText.value
+            item.category = selectConcept.querySelector(".text-concept").innerText
+            item.emoji = selectConcept.querySelector(".emoji").innerText
+            addItem(item)
+            input.style.border = "none"
+            concept.style.border = "none"
+            listOfItems.push(item)
+            saveToLocalStorage(listOfItems)
+            clearInput()
+        }
+    } else {
+        input.style.border = "2px solid var(--error-color)"
+        concept.style.border = "2px solid var(--error-color)"
+    }
+
+})
+
