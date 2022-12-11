@@ -70,14 +70,17 @@ function addItem(item) {
     cardEmojisPlaceholder.style.display = "none"
     itemContainer.style.overflowY = "auto"
     itemContainer.style.overflowX = "hidden"
+    itemContainer.style.display = "flex"
+    itemContainer.style.flexDirection = "column"
+    itemContainer.style.alignItems = "center"
     let itemWrapper = document.createElement("li")
     itemWrapper.classList.add("item-wrapper")
-    itemWrapper.style.backgroundColor = "#6D6D6D8A"
+    itemWrapper.style.backgroundColor = "var(--item-wrapper-color)"
     itemWrapper.style.width = "300px"
     itemWrapper.style.height = "50px"
     itemWrapper.style.borderRadius = "15px"
     itemWrapper.style.boxShadow = "0px 4px 4px 0px #00000040"
-    itemWrapper.style.display = "flex"  
+    itemWrapper.style.display = "flex"
     itemWrapper.style.justifyContent = "space-around"
     itemWrapper.style.alignItems = "center"
     itemWrapper.style.padding = "7px"
@@ -96,7 +99,7 @@ function addItem(item) {
     emojiWrapper.style.alignSelf = "flex-start"
     emojiWrapper.style.width = "55px"
     emojiWrapper.style.height = "43px"
-    emojiWrapper.style.backgroundColor = " #6D6D6D8A"
+    emojiWrapper.style.backgroundColor = "var(--emoji-wrapper-color)"
     emojiWrapper.style.boxShadow = "0px 4px 4px 0px #00000040"
     emojiWrapper.style.borderRadius = "15px"
 
@@ -282,7 +285,7 @@ addTransaction.addEventListener("click", (event) => {
     // check input is a number, if it is positive or negative and sum totals
     counter += 1
     event.preventDefault()
-   
+
     if (Number(inputText.value) && isConceptSelected) {
         let item = {
             id: counter,
